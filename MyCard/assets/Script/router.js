@@ -7,7 +7,7 @@
 // Learn life-cycle callbacks:
 //  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
-const getFatherScene = require('utils').getFatherScene;
+const getDirect = require('untils').getDirect;
 cc.Class({
     extends: cc.Component,
 
@@ -22,7 +22,7 @@ cc.Class({
         // bar: {
         //     get () {
         //         return this._bar;
-        //     },kb
+        //     },
         //     set (value) {
         //         this._bar = value;
         //     }
@@ -31,21 +31,15 @@ cc.Class({
 
     // LIFE-CYCLE CALLBACKS:
 
-    onLoad () {
-    	// node.on(cc.Node.EventType.MOUSE_DOWN, function (e){
-    	// 	console.log('Mouse Down');
-    	// 	// e.getLocationX();
-    	// 	console.log('mouse location', e.getLocationX());
-    	// })
-        console.log('test script onLoad', getFatherScene("Home"));
-    },
+    // onLoad () {},
 
     start () {
-    	console.log('test script start', this.node);
         var node = this.node;
-        node.on(cc.Node.EventType.MOUSE_DOWN, function (e) {
-            cc.director.loadScene("Home");
-        })
+        var linkName = this.node.name;
+        console.log('linkName', linkName)
+        var direct = getDirect(linkName);
+        console.log("direct", direct);
+        direct?cc.director.loadScene(direct);
     },
 
     // update (dt) {},

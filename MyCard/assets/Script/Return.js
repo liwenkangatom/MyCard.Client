@@ -22,7 +22,7 @@ cc.Class({
         // bar: {
         //     get () {
         //         return this._bar;
-        //     },kb
+        //     },
         //     set (value) {
         //         this._bar = value;
         //     }
@@ -32,20 +32,17 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-    	// node.on(cc.Node.EventType.MOUSE_DOWN, function (e){
-    	// 	console.log('Mouse Down');
-    	// 	// e.getLocationX();
-    	// 	console.log('mouse location', e.getLocationX());
-    	// })
-        console.log('test script onLoad', getFatherScene("Home"));
+
     },
 
     start () {
-    	console.log('test script start', this.node);
         var node = this.node;
         node.on(cc.Node.EventType.MOUSE_DOWN, function (e) {
-            cc.director.loadScene("Home");
-        })
+            var scene = cc.director.getRunningScene();
+            console.log("scene", scene._name);
+            var fatherSceneName = getFatherScene(scene._name);
+            (fatherSceneName)?cc.director.loadScene(fatherSceneName):'';
+        });
     },
 
     // update (dt) {},
